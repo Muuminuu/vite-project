@@ -1,9 +1,8 @@
  
     async function getPosts() {
-        const reponse = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+        const reponse = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=50`)
         
         const data = await reponse.json()
-        console.log(data)
         return data
         }
         
@@ -16,7 +15,6 @@
                 async function getComments(post){
                     const comments = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`) 
                     const data = await comments.json();
-                    console.log(data)
                     return data
                 }
 
@@ -25,13 +23,29 @@
         // Je séléctionne mon template
         const template = document.getElementById('posts-container-tpl')
 
+        const container2 = document.getElementById('comments-container')
+        const template2 = document.getElementById('comments-tpl')
+
+
+const afficherCommentaires = function(recupComments, commentsContainer){
+    for (let j = 0; j < recupComments.length;j++) {
+        const commentaire = recupComments[j];
+        const tcom = template2.content.cloneNode(true)
+        const com = tcom.querySelector('.comment')
+        //console.log(element.id,recupComments.postId)
+        com.innerText = commentaire.body
+                    
+        commentsContainer.append(tcom)
+    }
+}
+
         const ecrirePostsEtTitre = async function() {
             const recup = await getPosts()
             for (let i=0; i< recup.length; i++){
                 const element = recup[i]
                 const recupAuteur = await getAuthor(element)
                 const recupComments = await getComments(element)
-                console.log(recupAuteur)         
+                //console.log(recupAuteur)   
                 const tr = template.content.cloneNode(true)
                 const htwos = tr.querySelector('h2')
                 const ps = tr.querySelectorAll('p')
@@ -42,16 +56,23 @@
                 ps[0].textContent = recupAuteur.name
                 ps[2].textContent = `${recupComments.length} commentaire(s)`
                 imgs.src = `https://ui-avatars.com/api/?name=${splittedName[0]}+${splittedName[1]}&background=random`
+
+
+               
+
+                const commentsContainer = tr.querySelector('.comments-container')
+                //console.log(recupComments[0].body)
+                 afficherCommentaires(recupComments, commentsContainer)
+                
+                
                 container.append(tr)
             }
         }
-
-       // const commentairesDePosts = function (){
-         //   const recupPosts = 
-        //}
-// 
+       
 
 
-        ecrirePostsEtTitre()
+//commentairesDePosts()
+   ecrirePostsEtTitre()
+   commentairesDePosts()
 
 
