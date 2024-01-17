@@ -70,6 +70,10 @@
             border-top: 1px solid #e1e8ed;
             margin: 10px 0;
         }
+
+        .hide{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -79,33 +83,42 @@
     </header>
 
     <div id="posts-container">
-        <!-- Ici mettre template-->
+       
+    </div>
+
+   
+        
     </div>
     <template id="posts-container-tpl">
         <div class="post">
             <div class="post-header">
                 <img class="avatar" alt="Avatar">
-            <div>
-                <h2 class="htwos"></h2>
-                <p class="p"></p>
+                <div>
+                    <h2 class="htwos"></h2>
+                    <p class="p"></p>
+                </div>
             </div>
-        </div>
-        <div class="post-content">
-            <p></p>
-        </div>
-        <hr>
-        <p class="post-comment-nb"></p>
-        <div class="comments-container">
+            <div class="post-content">
+                <p></p>
+            </div>
+            <hr>
+            <p class="post-comment-nb"></p>
+            <div class="comments-container hide">
 
-        </div>
+            </div>
         </div>
     </template>
     
     <template id="comments-tpl">
         <div>
-            <p class="comment">
-
-            </p>
+            <div class="post-header">
+                <img class="avatar" alt="Avatar">
+                <h3 class="email"></h3>
+            </div>
+            <div>
+                    
+                <p class="comment"></p>
+            </div>
         </div>
     </template>
 
